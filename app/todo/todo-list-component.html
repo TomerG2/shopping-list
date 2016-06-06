@@ -1,0 +1,44 @@
+<h4>{{errorMessage}}</h4>
+
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
+        <button class="btn btn-success col-sm-12"
+                (click)="loadList()">
+            Load
+        </button>
+    </div>
+    <div class="col-xs-2 col-sm-2">
+        <button class="btn btn-danger col-sm-12"
+                (click)="saveList()">
+            Save
+        </button>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="form-group col-xs-3 col-sm-3">
+        <input  type="text" class="form-control"
+                placeholder="Search"
+                [(ngModel)]="listFilter">
+    </div>
+    <div class="form-group col-xs-5 col-sm-5">
+        <input type="text" class="form-control"
+               placeholder="New item"
+               [(ngModel)]="newTodo"
+               (keyup.enter)="addTodo()">
+    </div>
+    <div class="col-xs-2 col-sm-2">
+        <button type="button" class="btn btn-primary col-sm-12"
+                (click)="addTodo()">
+            Add
+        </button>
+    </div>
+</div>
+<ul *ngIf="todoList && todoList.length">
+    <li *ngFor="#todo of todoList | todoFilter : listFilter"
+        [style.text-decoration]="todo.checked ? 'line-through': ''">
+        <input  type="checkbox"
+                [(ngModel)]="todo.checked">
+        {{todo.text}}
+    </li>
+</ul>
